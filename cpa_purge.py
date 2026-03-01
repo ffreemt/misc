@@ -236,11 +236,27 @@ def main():
 
     if args.provider.lower() in ["all"]:
         files_to_purge = []
+        _ = """
         for provider in providers:
-            _ = [file for file in files if file.get("provider") == provider and file.get("status") == "error"]
+            # del_cond = file.get("provider") == provider and (file.get("status") == "error" or file.get("status") == "disabled")
+            # _ = [file for file in files if del_cond]
+            p_files = []
+            for file in files:
+                if del_cond = file.get("provider") == provider and (file.get("status") == "error" or file.get("status") == "disabled"):
+                    p_files.append(file)
             files_to_purge.extend(_)
+        """
+        for file in files:
+            if file.get("status") == "error" or file.get("status") == "disabled":
+               files_to_purge.append(file)
     else:
-        files_to_purge = [file for file in files if file.get("provider") == args.provider and file.get("status") == "error"]
+        #
+        # files_to_purge = [file for file in files if file.get("provider") == args.provider and file.get("status") == "error"]
+        files_to_purge = []
+        for file in files:
+            del_cond = file.get("provider") == args.provider and (file.get("status") == "error" or file.get("status") == "disabled")
+            if del_cond:
+                files_to_purge.append(file)
 
     if args.dry_run:
         print(Panel("[bold yellow] dry-run [/bold yellow]： 不会真的删…… ", border_style="yellow"))
