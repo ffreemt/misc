@@ -95,14 +95,14 @@ Examples (uv run %(prog)s or python %(prog)s):
         "-p", "--provider",
         default="codex",
         # choices=["codex", "qwen", "germini-cli", "antigravity", "all"],
-        help="Service provider name (default: codex)"
+        help="Service provider name, can set to all (default: codex)"
     )
 
     parser.add_argument(
         "--port",
         type=validate_port,
         default=8317,
-        help="Port number to listen on (default: 8317, falls back to 8317 if invalid)"
+        help="Port number to listen on (default: 8317, falls back to 8317 if invalid, can set to \"\")"
     )
 
     parser.add_argument(
